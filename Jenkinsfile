@@ -1,17 +1,15 @@
 pipeline {
     agent any
-
     environment {
-        DIRECTORY_PATH = '/my/project/code'
-        TESTING_ENVIRONMENT = 'Testing'
-        PRODUCTION_ENVIRONMENT = 'VictorProduction' //
+        DIRECTORY_PATH = '/path/to/code'
+        TESTING_ENVIRONMENT = 'staging'
+        PRODUCTION_ENVIRONMENT = 'Victor_Prod'  // Replace with your name for the production environment
     }
-
     stages {
         stage('Build') {
             steps {
-                echo "Fetching source code from ${DIRECTORY_PATH}"
-                echo "Compiling the code and generating artifacts"
+                echo "Fetching the source code from the directory path specified by the environment variable: ${DIRECTORY_PATH}"
+                echo "Compiling the code and generating any necessary artifacts"
             }
         }
         stage('Test') {
@@ -22,23 +20,25 @@ pipeline {
         }
         stage('Code Quality Check') {
             steps {
-                echo "Checking quality of the code"
+                echo "Checking the quality of the code"
             }
         }
         stage('Deploy') {
             steps {
-                echo "Deploying application to ${TESTING_ENVIRONMENT} environment"
+                echo "Deploying the application to the testing environment: ${TESTING_ENVIRONMENT}"
             }
         }
         stage('Approval') {
             steps {
-                echo "Waiting for manual approval"
-                sleep 10
+                script {
+                    echo "Waiting for manual approval..."
+                    sleep(time: 10, unit: 'SECONDS')  // Simulate a 10-second manual approval
+                }
             }
         }
         stage('Deploy to Production') {
             steps {
-                echo "Deploying application to ${PRODUCTION_ENVIRONMENT} environment"
+                echo "Deploying to the production environment: ${PRODUCTION_ENVIRONMENT}"
             }
         }
     }
