@@ -3,7 +3,7 @@ pipeline {
     environment {
         DIRECTORY_PATH = '/path/to/code'
         TESTING_ENVIRONMENT = 'staging'
-        PRODUCTION_ENVIRONMENT = 'Victor_Prod'  // Replace with your name for the production environment
+        PRODUCTION_ENVIRONMENT = 'Victor_Production' 
     }
     stages {
         stage('Build') {
